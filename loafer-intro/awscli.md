@@ -9,9 +9,9 @@ aws --endpoint-url http://localhost:4100 sqs create-queue --queue-name foobar-fr
 
 # subscribe queue to topic
 aws --endpoint-url http://localhost:4100 sns subscribe --topic-arn arn:aws:sns:local:000000000000:friend-created \
-> --protocol sqs --notification-endpoint http://localhost:4100/queue/foobar-friend-created
+ --protocol sqs --notification-endpoint http://localhost:4100/queue/foobar-friend-created
 
-# publish the contents of `test_user.json` to topic
+# publish the contents of 'test_user.json' to topic
 aws --endpoint-url http://localhost:4100 sns publish \
  --topic-arn arn:aws:sns:local:000000000000:friend-created \
  --message file://test_user.json
