@@ -1,0 +1,3 @@
+root_dir: /tmp/salt-ssh/
+cachedir: /tmp/salt-ssh/cachedir
+state_output_diff: True

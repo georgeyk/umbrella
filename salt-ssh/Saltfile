@@ -1,0 +1,3 @@
+salt-ssh:
+    config_dir: ./config
+    ssh_log_file: /tmp/salt-ssh/log.txt

@@ -1,0 +1,4 @@
+local:
+    host: localhost
+    user: georgeyk
+    sudo: True
