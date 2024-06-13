@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# asdf
+.tool-versions
+
+# terraform
+tf/.terraform/*
+*.tfstate*
