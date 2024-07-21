@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 jupyterlab-vim = "*"
+matplotx = {extras = ["all"], version = "*"}
+pandas = "*"
 
 [dev-packages]
 
