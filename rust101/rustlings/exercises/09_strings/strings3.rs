@@ -1,13 +1,40 @@
 fn trim_me(input: &str) -> &str {
-    // TODO: Remove whitespace from both ends of a string.
+    let mut left = 0;
+    let mut right = input.len() - 1;
+    while left < right {
+        if input.chars().nth(left).unwrap() == ' ' {
+            left += 1;
+        }
+        else {
+            break
+        }
+    }
+    while right > left {
+        if input.chars().nth(right).unwrap() == ' ' {
+            right -= 1;
+        }
+        else {
+            break
+        }
+    }
+
+    &input[left..=right]
 }
 
 fn compose_me(input: &str) -> String {
-    // TODO: Add " world!" to the string! There are multiple ways to do this.
+    format!("{input} world!")
 }
 
 fn replace_me(input: &str) -> String {
-    // TODO: Replace "cars" in the string with "balloons".
+    let mut words = Vec::<&str>::new();
+    for word in input.split_whitespace() {
+        match word {
+            "cars" => words.push("balloons"),
+            _ => words.push(word),
+        }
+    }
+
+    words.join(" ")
 }
 
 fn main() {
