@@ -1,6 +1,6 @@
 DON'T EDIT THIS FILE!
 
-generics1
+lifetimes3
 
 intro1
 intro2
@@ -58,3 +58,14 @@ errors3
 errors4
 errors5
 errors6
+generics1
+generics2
+traits1
+traits2
+traits3
+traits4
+traits5
+quiz3
+lifetimes1
+lifetimes2
+lifetimes3
