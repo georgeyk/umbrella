@@ -1,6 +1,6 @@
 DON'T EDIT THIS FILE!
 
-lifetimes3
+iterators2
 
 intro1
 intro2
@@ -69,3 +69,7 @@ quiz3
 lifetimes1
 lifetimes2
 lifetimes3
+tests1
+tests2
+tests3
+iterators1
