@@ -9,48 +9,56 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn build(args: &Vec<String>) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("Not enough arguments");
+    pub fn build(mut args: impl Iterator<Item = String>) -> Result<Config, &'static str> {
+        args.next();
+
+        let mut query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing arguments"),
+        };
+
+        let ignore_case = query == "-i" || env::var("IGNORE_CASE").is_ok();
+
+        if query == "-i" {
+            match args.next() {
+                Some(arg) => query = arg,
+                None => return Err("Missing arguments"),
+            }
         }
 
-        match (args[1].as_str(), args.len()) {
-            ("-i", 4) => Ok(Config {
-                query: args[2].clone(),
-                file_path: args[3].clone(),
-                ignore_case: true,
-            }),
-            ("-i", _) => return Err("Invalid arguments"),
-            (query, 3) => Ok(Config {
-                query: query.to_string(),
-                file_path: args[2].clone(),
-                ignore_case: env::var("IGNORE_CASE").is_ok(),
-            }),
-            _ => return Err("Invalid arguments"),
-        }
+        let file_path = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing arguments"),
+        };
+
+        Ok(Config {
+            query,
+            file_path,
+            ignore_case,
+        })
     }
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.file_path)?;
-    for line in search(&config.query, &contents, config.ignore_case) {
-        println!("{line}");
-    }
+    search(
+        &config.query,
+        &fs::read_to_string(config.file_path)?,
+        config.ignore_case,
+    )
+    .iter()
+    .for_each(|line| println!("{line}"));
 
     Ok(())
 }
 
 fn search<'a>(query: &str, content: &'a str, ignore_case: bool) -> Vec<&'a str> {
-    let mut res = Vec::new();
-    for line in content.lines() {
-        if (ignore_case && line.to_lowercase().contains(&query.to_lowercase()))
-            || line.contains(query)
-        {
-            res.push(line);
-        }
-    }
-
-    res
+    content
+        .lines()
+        .filter(|line| {
+            ignore_case && line.to_lowercase().contains(&query.to_lowercase())
+                || line.contains(&query)
+        })
+        .collect()
 }
 
 #[cfg(test)]
