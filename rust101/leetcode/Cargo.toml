@@ -1,0 +1,20 @@
+[package]
+name = "leetcode"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+
+[profile.dev]
+panic = "abort"
+
+[lints.rust]
+unsafe_code = "forbid"
+unstable_features = "forbid"
+
+[lints.clippy]
+todo = "forbid"
+empty_loop = "forbid"
+infinite_loop = "deny"
+mem_forget = "deny"
