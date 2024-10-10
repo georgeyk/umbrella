@@ -8,6 +8,7 @@ fn main() {
     });
 
     match problem.to_lowercase().trim() {
+        "962" => p962::main(),
         "1331" => p1331::main(),
         "debug" => template::main(),
         _ => {
