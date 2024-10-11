@@ -10,6 +10,7 @@ fn main() {
     match problem.to_lowercase().trim() {
         "962" => p962::main(),
         "1331" => p1331::main(),
+        "1942" => p1942::main(),
         "debug" => template::main(),
         _ => {
             println!("Problem not found");
