@@ -106,3 +106,6 @@ ENV/
 # terraform
 tf/.terraform/*
 *.tfstate*
+*.tar.gz
+*.sqlite3
+*/.*
