@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-in-space
+  namespace: my-name-is
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx

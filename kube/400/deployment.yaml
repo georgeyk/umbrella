@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appname
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appname
+
+  template:
+    metadata:
+      labels:
+        app: appname
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          # injecting directly
+          env:
+            - name: FOO
+              value: "BAR"
+
+            - name: BAR
+              valueFrom:
+                configMapKeyRef:
+                  name: appname-config
+                  key: BAR
+
+          # alternative
+          # envFrom:
+          #   - configMapRef:
+          #     name: appname-config
+          #   prefix: SOME_
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appname-config
+
+data:
+  BAR: "FOO"

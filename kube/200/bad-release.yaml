@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appname
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appname
+
+  template:
+    metadata:
+      labels:
+        app: appname
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          # this should fail
+          readinessProbe:
+            periodSeconds: 1
+            successThreshold: 5
+            httpGet:
+              path: /foo
+              port: 80

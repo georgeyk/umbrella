@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: caddy-svc
+spec:
+  selector:
+    app: caddy
+  ports:
+    - port: 4000
+      targetPort: 80
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: caddy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: caddy
+  template:
+    metadata:
+      labels:
+        app: caddy
+    spec:
+      containers:
+        - image: caddy
+          name: caddy-container

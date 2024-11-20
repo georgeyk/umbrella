@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appname
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appname
+
+  template:
+    metadata:
+      labels:
+        app: appname
+
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: appname-config
+
+      containers:
+        - name: nginx-container
+          image: nginx
+          volumeMounts:
+            - name: config
+              mountPath: /config
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appname-config
+
+data:
+  THIS_FILE: "THIS_CONTENT"

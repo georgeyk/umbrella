@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-jobs
+spec:
+  # auto clean up
+  # ttlSecondsAfterFinished: 60
+  # multiple runs
+  # completions: 5
+  #
+  # parallelism: 2
+  # backoffLimit: 10
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: echo
+          image: busybox
+          command: ["echo", "jobs is done"]
